@@ -19,21 +19,23 @@ This section is for data analysis in the CircaKB backend, used to process gene e
 ### Preparation
 
 Ensure your environment has the following dependencies:
-- jsonlite v1.8.8
-- stringr v1.5.1
-- dplyr v1.1.4
-- tidyr v1.3.0
-- fdrtool v1.2.17
-- cosinor2 v0.2.1
-- rain v1.30.0
-- MetaCycle v1.2.0
-- GeneCycle v1.1.5
-- DODR v0.99.2
-- circacompare v0.2.0
-- diffCircadian v0.0.0
-- nloptr v2.0.3
-- limorhyde v1.0.1
-- limma v3.52.4
+| Package       | Version  |
+| ------------- | -------- |
+| jsonlite      | v1.8.8   |
+| stringr       | v1.5.1   |
+| dplyr         | v1.1.4   |
+| tidyr         | v1.3.0   |
+| fdrtool       | v1.2.17  |
+| cosinor2      | v0.2.1   |
+| rain          | v1.30.0  |
+| MetaCycle     | v1.2.0   |
+| GeneCycle     | v1.1.5   |
+| DODR          | v0.99.2  |
+| circacompare  | v0.2.0   |
+| diffCircadian | v0.0.0   |
+| nloptr        | v2.0.3   |
+| limorhyde     | v1.0.1   |
+| limma         | v3.52.4  |
 
 ### Running Method
 
