@@ -1,7 +1,7 @@
 rm(list=ls())
 # 1.Init parameters-------------------------------------------
 library(jsonlite)
-library(tibble)
+library(dplyr)
 args=commandArgs(trailingOnly = T)
 # Read parameters from the JSON file
 params <- jsonlite::fromJSON(args[1])
@@ -192,6 +192,5 @@ if(length(u_sMethods)>0 && length(uGroup)>0){
 if(length(u_dMethods)>0 && length(uComGroup)>0){
   dResult=diffRhythm()
 }
-
 
 

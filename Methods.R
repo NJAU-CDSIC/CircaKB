@@ -1,12 +1,7 @@
-library(stringr)
 library(dplyr)
-library(tidyr)#gather(),tibble()
-library(magrittr)
+library(tidyr)
 library(fdrtool)
-# library(doParallel)
-# library(foreach)
-library(rjson)
-
+library(stringr)
 #' @title Create Directory
 #' @description This function checks if a directory exists at the specified address, and if it does not exist, it creates the directory, including any necessary but nonexistent parent directories.
 #' @param addr A character string representing the path to the directory to be created.
