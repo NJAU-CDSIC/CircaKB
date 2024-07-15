@@ -1,0 +1,15 @@
+{
+  "dup": 1,
+  "startTime": 8,
+  "samplingCount": 6,
+  "interval": 4,
+  "idenCounts":2,
+  "dataMode":"mode1",
+  "singleGroup":["H","L"],
+  "compareGroup":["HVs.L"],
+  "singleMethods":[1,2,3,4],
+  "diffMethods":[1,2,3,4],
+  "geneNum":100,
+  "fileDir": "Example_data/mode1.csv",
+  "saveAddr":"Result"
+}

@@ -1,0 +1,15 @@
+{
+  "dup": 2,
+  "startTime": 0,
+  "samplingCount": 6,
+  "interval": 4,
+  "idenCounts":2,
+  "dataMode":"mode2",
+  "singleGroup":["NPYWT","NPYKO"],
+  "compareGroup":["NPYWTVs.NPYKO"],
+  "singleMethods":[1,2,3,4],
+  "diffMethods":[1,2,3,4],
+  "geneNum":100,
+  "fileDir": "Example_data/mode2.csv",
+  "saveAddr":"Result"
+}

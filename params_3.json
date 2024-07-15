@@ -1,0 +1,15 @@
+{
+  "dup": 2,
+  "startTime": 8,
+  "samplingCount": 6,
+  "interval": 4,
+  "idenCounts":2,
+  "dataMode":"mode3",
+  "singleGroup":["WT","KO"],
+  "compareGroup":["WTVs.KO"],
+  "singleMethods":[1,2,3,4],
+  "diffMethods":[1,2,3,4],
+  "geneNum":100,
+  "fileDir": "Example_data/mode3.csv",
+  "saveAddr":"Result"
+}
