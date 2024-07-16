@@ -36,6 +36,7 @@ Ensure your environment has the following dependencies:
 | nloptr        | v2.0.3   |
 | limorhyde     | v1.0.1   |
 | limma         | v3.52.4  |
+| parallel      | v4.2.1   |
 
 ### Running Method
 
