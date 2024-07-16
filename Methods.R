@@ -86,6 +86,7 @@ Cosinor <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNa
     print(paste("Cosinor",sep=":",i))
     res=data.frame(matrix(ncol = 11, nrow = nRow,dimnames = list(rowName,colName)))
     Gtemp=get(group[i])
+    aPer=c()
     for (j in c(1:nRow)) {
       
       temp_table=Gtemp[j,] %>%  gather("time","value")
@@ -103,7 +104,7 @@ Cosinor <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNa
         l=length(peri[["plot_env"]][["besttime"]])
         per=as.numeric(peri[["plot_env"]][["besttime"]][l])
         res[j,]$period=per
-        
+        aPer=c(aPer,per)
         fit.cosinor <- cosinor.lm(value ~ time(time), period = per,data =temp_table)
         
         res[j,1] <- cosinor.detect(fit.cosinor)[4]#p
@@ -136,8 +137,11 @@ Cosinor <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNa
     res$q=fdrtool(res$p, statistic="pvalue",plot = F,color.figure = F,verbose = F)$qval
     res$amp.q = fdrtool(res$amp.p, statistic="pvalue",plot = F,color.figure = F,verbose = F)$qval
     res$acr.q = fdrtool(res$acr.p, statistic="pvalue",plot = F,color.figure = F,verbose = F)$qval
+    temLag=as.numeric(res$acrophase_h)
+    modifyAcrophase_h=ifelse(temLag-Times[1]<0,temLag+aPer-Times[1],temLag-Times[1]) 
+      
+    RRres=data.frame(period=res$period,amp=res$amplitude,lag=modifyAcrophase_h,mesor=res$mesor,p=res$p,q=res$q,acrophase=res$acrophase,acrophase_h=res$acrophase_h)
     
-    RRres=data.frame(period=res$period,amp=res$amplitude,lag=res$acrophase_h,mesor=res$mesor,p=res$p,q=res$q,acrophase=res$acrophase)
     RRres=as.data.frame(lapply(RRres,as.character),stringsAsFactors=F)
     rownames(RRres)=rownames(res)
     RRres[is.na(RRres)]="NA"
@@ -254,6 +258,7 @@ Meta2d <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNam
                     weightedPerPha=T,
                     adjustPhase = "predictedPer",
                     filestyle="csv",outputFile = F)
+    
     colnames(temp_res[["ARS"]])[7]="Lag"
     temp_res[["meta"]]=NULL
     
@@ -275,6 +280,11 @@ Meta2d <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNam
     if(is.null(temp_res[["ARS"]])){
       ARS=as.data.frame(matrix(data="NA",nrow = nrow(genelist),ncol = 5,dimnames = list(NULL,c("period","amp","lag","p","q"))),stringsAsFactors = F)
     }else{
+      lg=as.numeric(temp_res[["ARS"]]$Lag)
+      lp=as.numeric(temp_res[["ARS"]]$period)
+      tempLag=ifelse(lg-Times[1]<0,
+                     lg+lp-Times[1],
+                     lg-Times[1])
       ARS=data.frame(period=temp_res[["ARS"]]$period,amp=temp_res[["ARS"]]$amplitude,lag=temp_res[["ARS"]]$Lag,mesor=temp_res[["ARS"]]$mean,p=temp_res[["ARS"]]$pvalue,q=temp_res[["ARS"]]$fdr_BH)
       ARS=as.data.frame(lapply(ARS,as.character),stringsAsFactors=F)
       ARS[is.na(ARS)]="NA"
@@ -290,7 +300,12 @@ Meta2d <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNam
     if(is.null(temp_res[["LS"]])){
       LS=as.data.frame(matrix(data="NA",nrow = nrow(genelist),ncol = 5,dimnames = list(NULL,c("period","amp","lag","p","q"))),stringsAsFactors = F)
     }else{
-      LS=data.frame(period=temp_res[["LS"]]$Period,amp=NA,lag=NA,mesor=NA,p=temp_res[["LS"]]$p,q=temp_res[["LS"]]$BH.Q)
+      lg=as.numeric(temp_res[["LS"]]$PhaseShift)
+      lp=as.numeric(temp_res[["LS"]]$Period)
+      lg=lg-Times[1]
+      tempLag=ifelse(lg<0 | is.na(lg) |lg=="",NA,
+                     ifelse(lg-lp>0,lg-lp,lg))
+      LS=data.frame(period=temp_res[["LS"]]$Period,amp=NA,lag=tempLag,mesor=NA,p=temp_res[["LS"]]$p,q=temp_res[["LS"]]$BH.Q)
       LS=as.data.frame(lapply(LS,as.character),stringsAsFactors=F)
       LS[is.na(LS)]="NA"
       rownames(LS)=temp_res[["LS"]]$CycID
@@ -731,6 +746,9 @@ LimoRhyde<-function(PreUcomgroup, dup, Times, interval, saveAddr, geneList, nRow
   return(T)
   
 }
+
+
+
 
 
 
