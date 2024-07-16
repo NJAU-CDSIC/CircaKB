@@ -8,7 +8,7 @@ source("Methods.R")
 rhyOscillation <-function(){
   cat("Executing Circadian Oscillation Analysis---------------------------\n")
   # tGroup=paste0("t_",uGroup)
-  result_list <- lapply(u_sMethods, function(name) {
+  result_list <- mclapply(u_sMethods, function(name) {
     tryCatch(
       do.call(name,list(group=uGroup, dup = dup, Times=Times, interval=interval, saveAddr=saveAddr, geneList=geneList, nRow=nRow, rowName=rowName)),
       error = function(e) {
@@ -42,7 +42,7 @@ diffRhythm <- function(){
     }
     cmb = cmb
 
-    Com_list <- lapply(u_dMethods, function(name) {
+    Com_list <- mclapply(u_dMethods, function(name) {
       tryCatch(
         do.call(name, list(PreUcomgroup=PreUcomgroup,dup = dup, Times=Times, interval=interval, 
                            saveAddr=saveAddr, geneList=geneList, nRow=nRow, rowName=rowName, cmb=cmb)),
