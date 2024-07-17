@@ -189,7 +189,6 @@ Rain<-function(group, dup, Times, interval, saveAddr, geneList, nRow, rowName){
       assign(group[i],temp)
     }
   }
-  
   # Res=list()
   for (i in seq_along(group)) {
     Rtemp=rain(t(get(group[i])[c(1:nRow),]),deltat=interval,
@@ -197,6 +196,7 @@ Rain<-function(group, dup, Times, interval, saveAddr, geneList, nRow, rowName){
                method="independent",#independent: Multiple cycles are interpreted as repetitions of a single cycle
                period.delta=4,
                verbose = T,
+               peak.border=c(0,1),
                nr.series=nr.series,
                adjp.method="ABH")
     colnames(Rtemp)[2]="Lag"
@@ -236,6 +236,7 @@ Meta2d <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNam
   library(MetaCycle)
   if(dup==0||dup==1){
     c_time=Times
+    dup=1
   }else{
     c_time=seq(Times[1],(dup*length(Times)-1)*interval+Times[1],by=interval)
   }
@@ -301,6 +302,7 @@ Meta2d <- function(group, dup, Times, interval, saveAddr, geneList, nRow, rowNam
       LS=as.data.frame(matrix(data="NA",nrow = nrow(genelist),ncol = 5,dimnames = list(NULL,c("period","amp","lag","p","q"))),stringsAsFactors = F)
     }else{
       lg=as.numeric(temp_res[["LS"]]$PhaseShift)
+      lg=lg/dup
       lp=as.numeric(temp_res[["LS"]]$Period)
       lg=lg-Times[1]
       tempLag=ifelse(lg<0 | is.na(lg) |lg=="",NA,
