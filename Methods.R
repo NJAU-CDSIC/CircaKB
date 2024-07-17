@@ -385,14 +385,14 @@ GeneCycle <- function(group, dup, Times, interval, saveAddr, geneList, nRow, row
   #robust.g.test
   for (i in seq_along(group)) {
     res=data.frame(matrix(ncol = 2, nrow = nRow,dimnames = list(rowName,colName)))
-    spe5 = robust.spectrum(get(group[i]))
+    spe5 = robust.spectrum(get(group[i]),periodicity.time=T)
     pval = robust.g.test(spe5)  
     tempfile=paste("g_pop_length_",nrow(spe5),sep = "",".txt")
     unlink(tempfile)
     
     num.na=is.na(pval)
     num.overrange=pval>1
-    pval[num.na]=0
+    pval[num.na]=1
     pval[num.overrange]=1
     
     fdr.out = fdrtool(pval, statistic="pvalue",plot = F,color.figure = F,verbose = F)
