@@ -35,9 +35,6 @@ Ensure your environment has the following dependencies:
 
 ## How to Use
 
-
---Running the HNSPPI model requires two edgelist files
-
 --Command line:
 
 ./RUN.sh
