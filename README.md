@@ -1,6 +1,6 @@
 # CircaKB Data Analysis
 
-This repository deposited the codes for analyzing the circadian patterns of gene expression.
+This repository deposited the codes for analyzing the circadian patterns of gene expression. We collected  and integrated 12 computational models to identify oscillatory patterns of gene expression. These models (with the codes) were published by the original authors.  
 
 ## Code files
 
@@ -50,6 +50,7 @@ Ensure your environment has the following dependencies:
 
 --For example:
 1. Configure the params_1.json file with the following parameters:
+```
 {
   "dup": 1,
   "startTime": 8,
@@ -65,9 +66,8 @@ Ensure your environment has the following dependencies:
   "fileDir": "Example_data/Example 1.csv",
   "saveAddr": "Result"
 }
+```
 
 
 2. Run the following command:
-nohup Rscript --vanilla initData.R params_1.json 2>&1 | tee initData.out || { echo 'initData_1.R failed' ; exit 1; } &
-
-
+`nohup Rscript --vanilla initData.R params_1.json 2>&1 | tee initData.out || { echo 'initData_1.R failed' ; exit 1; } &`
