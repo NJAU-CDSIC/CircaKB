@@ -1,23 +1,19 @@
 # CircaKB Data Analysis
 
-This section is for data analysis in the CircaKB backend, used to process gene expression matrices and generate corresponding results saved to .csv files.
+This repository deposited the codes for analyzing the circadian patterns of gene expression.
 
-## File Structure
+## Code files
 
-- `initData.R`: Receives user input parameters, initializes necessary information, reads in the gene expression matrix CSV file, and calls `batchProcessing.R` for batch algorithm processing.
-- `batchProcessing.R`: Batch calls 7 Circadian oscillation and 5 Differential rhythmicity detection algorithms.
-- `Methods.R`: Specific algorithm implementation and result saving.
-- `params_x.json`: Parameters required to execute the algorithms, read by `initData.R`.
-- `Example`: Contains three types of example data.
-- `RUN.sh`: Command lines to run the scripts on the shell are deposited in RUN.sh.
+- `initData.R`: Import the data file (.csv)  and obtain the time-course gene expression matrix.
+- `batchProcessing.R`: Based on the experimental conditions,  7 models for circadian oscillation detection or 5 models for differential rhythmicity analysis will be implemented through this interface.
+- `Methods.R`: This script file includes the source code for all 12 computational models.
+- `params_x.json`: Parameters asociated with uploading dataset (import to initData.R)
+- `Example_data`: This folder hosts three example datasets.
+- `RUN.sh`: Command lines to run the scripts on the shell.
 
-## How to Use
-1. Data analysis has been tested in Ubuntu 20.04 using R-4.2.1.
-2. Configure `params_x.json`.
-3. Use `./RUN.sh` to start the program.
+### Configuration
 
-### Preparation
-
+Data analysis has been tested in Ubuntu 20.04 using R-4.2.1.
 Ensure your environment has the following dependencies:
 | Package       | Version  |
 | ------------- | -------- |
@@ -36,10 +32,19 @@ Ensure your environment has the following dependencies:
 | nloptr        | v2.0.3   |
 | limorhyde     | v1.0.1   |
 | limma         | v3.52.4  |
-| parallel      | v4.2.1   |
 
-### Running Method
+## How to Use
 
-Example:
+
+--Running the HNSPPI model requires two edgelist files
+
+--Command line:
+
+./RUN.sh
+
+--Model output: will generate a file called xxx.csv
+
+--For example:
 1. Open a terminal and navigate to the project directory.
 2. Run the following command to execute the `initData.R` file and read in the parameters from `params.json`: `./RUN.sh`
+
