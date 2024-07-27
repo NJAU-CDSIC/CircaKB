@@ -6,7 +6,7 @@ This repository deposited the codes for analyzing the circadian patterns of gene
 
 - `initData.R`: Import the data file (.csv)  and obtain the time-course gene expression matrix.
 - `batchProcessing.R`: Based on the experimental conditions,  7 models for circadian oscillation detection or 5 models for differential rhythmicity analysis will be implemented through this interface.
-- `Methods.R`: This script file includes the source code for all 12 computational models.
+- `Methods.R`: This script file includes the source code for all 12 computational models. The code for each model can be freely obtained from the original authors via their publications.
 - `params_x.json`: Parameters asociated with uploading dataset (import to initData.R)
 - `Example_data`: This folder hosts three example datasets.
 - `RUN.sh`: Command lines to run the scripts on the shell.
@@ -35,13 +35,39 @@ Ensure your environment has the following dependencies:
 
 ## How to Use
 
+
+--Running the CircaKB analysis requires configuring the `params_x.json` file.
+
 --Command line:
 
-./RUN.sh
+To execute the script, you have two options:
 
---Model output: will generate a file called xxx.csv
+1.Using `./RUN.sh`
+
+2.Using `nohup Rscript --vanilla initData.R params_1.json 2>&1 | tee initData.out || { echo 'initData_1.R failed' ; exit 1; } &`
+
+--Model output:  will generate a folder containing result files, which are stored in .csv format.
 
 --For example:
-1. Open a terminal and navigate to the project directory.
-2. Run the following command to execute the `initData.R` file and read in the parameters from `params.json`: `./RUN.sh`
+1. Configure the params_1.json file with the following parameters:
+{
+  "dup": 1,
+  "startTime": 8,
+  "samplingCount": 6,
+  "interval": 4,
+  "idenCounts": 2,
+  "dataMode": "mode1",
+  "singleGroup": ["H", "L"],
+  "compareGroup": ["HVs.L"],
+  "singleMethods": [1, 2, 3, 4],
+  "diffMethods": [1, 2, 3, 4],
+  "geneNum": 100,
+  "fileDir": "Example_data/Example 1.csv",
+  "saveAddr": "Result"
+}
+
+
+2. Run the following command:
+nohup Rscript --vanilla initData.R params_1.json 2>&1 | tee initData.out || { echo 'initData_1.R failed' ; exit 1; } &
+
 
