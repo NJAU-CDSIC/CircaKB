@@ -60,8 +60,8 @@ Ensure your environment has the following dependencies:
   "dataMode": "mode1",
   "singleGroup": ["H", "L"],
   "compareGroup": ["HVs.L"],
-  "singleMethods": [1, 2, 3, 4],
-  "diffMethods": [1, 2, 3, 4],
+  "singleMethods": [1, 2, 3, 4],  // 1: MetaCycle(JTK_CYCLE,ARSER,Lomb-Scargle), 2: Cosinor, 3: Rain, 4: GeneCycle
+  "diffMethods": [1, 2, 3, 4], // 1: diffCircadian, 2: CircaCompare, 3: LimoRhyde, 4: DODR
   "geneNum": 100,
   "fileDir": "Example_data/Example 1.csv",
   "saveAddr": "Result"
