@@ -40,11 +40,11 @@ Ensure your environment has the following dependencies:
 
 --Command line:
 
-To execute the script, you have two options:
+ To execute the script, you have two options:
 
-1.Using `./RUN.sh`
+ 1.Using `./RUN.sh`
 
-2.Using `nohup Rscript --vanilla initData.R params_1.json 2>&1 | tee initData.out || { echo 'initData_1.R failed' ; exit 1; } &`
+ 2.Using `nohup Rscript --vanilla initData.R params_1.json 2>&1 | tee initData.out || { echo 'initData_1.R failed' ; exit 1; } &`
 
 --Model output:  will generate a folder containing result files, which are stored in .csv format.
 
